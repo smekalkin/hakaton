@@ -1,0 +1,108 @@
+body {
+	margin: 5px;
+}
+
+/*---top-door-counters---*/
+div#select-door {
+	margin-right: 500px;
+	margin-left: 50px;
+}
+div#select-door div.hackaton {
+	margin: 5px auto;
+	background: url("../imgs/hackaton.gif") no-repeat;
+	width: 105px;
+	height: 27px;
+}
+div#select-door div.door {
+	position: relative;
+	width: 78px;
+	height: 170px;
+	margin: 0 auto;
+	background-image: url("../imgs/door.gif");
+	background-repeat: no-repeat;
+	background-position: left;
+}
+div#select-door div.door-act {
+	background-position: right;
+}
+div#select-door div#counter-boy {
+	position: absolute;
+	top:0;
+	right: -90px;
+}
+div#select-door div#counter-girl {
+	position: absolute;
+	top: 20px;
+	right: -90px;
+}
+
+/*---main-people---*/
+div#select-select {
+	position: relative;
+	height: 500px;
+}
+div#select-select div.boy {
+	width: 50px;
+	height: 84px;
+	cursor: pointer;
+	margin: 5px;
+	display: inline-block;
+	background-position: center;
+	background-repeat: no-repeat;
+	position: absolute;
+	top:0;
+	left:0;
+}
+div#select-select div.boy-left {
+	background-image: url("../imgs/boy_anim_left.gif");
+}
+div#select-select div.boy-right {
+	background-image: url("../imgs/boy_anim_right.gif");
+}
+div#select-select div.boy-act {
+	background-image: url("../imgs/boy_act.gif");
+}
+div#select-select div.girl {
+	width: 50px;
+	height: 84px;
+	cursor: pointer;
+	margin: 5px;
+	display: inline-block;
+	background-position: center;
+	background-repeat: no-repeat;
+	position: absolute;
+	top:0;
+	left:0;
+}
+div#select-select div.girl-left {
+	background-image: url("../imgs/girl_anim_left.gif");
+}
+div#select-select div.girl-right {
+	background-image: url("../imgs/girl_anim_right.gif");
+}
+div#select-select div.girl-act {
+	background-image: url("../imgs/girl_act.gif");
+}
+
+/*---graph-canvas---*/
+div#select-graph {
+	float: right
+}
+div#select-graph div {
+	margin-left: 70px;
+}
+canvas#myCanvas {
+	width: 400px;
+	height: 200px;
+}
+
+/*---time---*/
+div#select-time {
+	float: left;
+	font-size: 30px;
+}
+
+/*---result-end---*/
+div#select-result {
+	display: none;
+}
