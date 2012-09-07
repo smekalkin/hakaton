@@ -32,10 +32,3 @@ var graph = {};
 	}
 	
 })();
-
-$(function() {
-	graph.data1 = [100];
-	graph.data2 = ['0'];
-
-	graph.init(graph.data1, graph.data2);
-});

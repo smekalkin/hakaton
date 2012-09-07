@@ -17,9 +17,13 @@
 		<script type="text/javascript" src="/js/graph.js"></script>
 		
 		<script type="text/javascript" src="/js/dragDrop.js"></script>
+		<script type="text/javascript" src="/js/audio.js"></script>
 	</head>
 	<body>
 		<div id="select-time">	
+		</div>
+		<div id="select-level">
+			Уровень: <span>1</span>
 		</div>
 		
 		<div id="select-graph">
@@ -64,5 +68,22 @@
 			<p></p>
 			<input type="submit" value="Еще раз!" />
 		</div>
+		
+		<audio id="audio-bg" preload="auto">
+			<source src="/audio/bg.mp3">
+			<source src="/audio/bg.wav">
+		</audio>
+		<audio id="audio-drop-boy" preload="auto">
+			<source src="/audio/drop-boy.mp3">
+			<source src="/audio/drop-boy.wav">
+		</audio>
+		<audio id="audio-drop-girl" preload="auto">
+			<source src="/audio/drop-girl.mp3">
+			<source src="/audio/drop-girl.wav">
+		</audio>
+		<audio id="audio-end" preload="auto">
+			<source src="/audio/end.mp3">
+			<source src="/audio/end.wav">
+		</audio>
 	</body>
 </html>

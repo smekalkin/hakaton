@@ -2,49 +2,74 @@
 var time = {};
 
 (function () {
-	var timeGame = 30; // время игры в сек.
+	var interval;
 	
 	// включить таймер
-	time.on = function() {
-		var sec = 0;
-		var min = 0;
-		var hour = 0;
+	// back - флаг обратного отсчета
+	// startTime стартовое время в секундах
+	time.on = function(back, startTime) {
+		var sec = startTime%60;
+		var min = ((startTime - sec)/60)%60;
+		var hour = (startTime / 3600) - ((startTime / 3600) % 1);
 
 		var cont = document.getElementById('select-time');
 		var elem = document.createElement('div');
-		elem.innerHTML = hour + ":0" + min + ":0" + sec;
+		
+		if(min < 10) { var minHtml = '0' + min; }
+		else { var minHtml = min; }
+		
+		if(sec < 10) { var secHtml = '0' + sec; }
+		else { var secHtml = sec; }
+		
+		elem.innerHTML = hour + ':' + minHtml + ':' + secHtml;
 		cont.appendChild(elem);
 
-		var a = setInterval ( function() {
-			sec++;
-
-			if ( sec==60 ) {
-				sec = 0;
-				min++;
-
-			} else if (min==60) {
-				min = 0;
-				hour++;
+		interval = setInterval ( function() {
+			if(back) {
+				sec--;
+				
+				if(sec < 0) {
+					sec = 59;
+					min--;
+				}
+				
+				if(min < 0) {
+					min = 59;
+					hour--;
+				}
+			} else {
+				sec++;
+				if(sec == 60) {
+					sec = 0;
+					min++;
+				} else if(min == 60) {
+					min = 0;
+					hour++;
+				}
 			}
 
 			if ( sec < 10 )  {
-				brS = ":0"; // добавить перед секундами 0, если число не двузначное
-			} else {brS = ":"} ;
+				brS = ':0'; // добавить перед секундами 0, если число не двузначное
+			} else {brS = ':'} ;
 
 			if ( min < 10 )  {
-				brM = ":0"; // добавить перед минутами 0, если число не двузначное
-			} else {brM = ":"} ;
+				brM = ':0'; // добавить перед минутами 0, если число не двузначное
+			} else {brM = ':'} ;
 
-			if (hour == 2) { // остановить работу скрипта, если прошло 2 часа
+			if(back) {
+				if(!hour && !min && !sec) {
+					clearInterval(interval);
+					time.result();
+				}
+			}
+			else if(hour == 2) { // остановить работу скрипта, если прошло 2 часа
 				min = 0;
 				sec = 0;
 
-				clearInterval(a);
+				clearInterval(interval);
 			}
 
 			elem.innerHTML = hour + brM + min + brS + sec;
-			
-			if((time.unix() - time.start) == timeGame) { time.result(); }
 		},1000 );
 	}
 	
@@ -57,6 +82,8 @@ var time = {};
 	
 	// результаты игры по времени
 	time.result = function() {
+		clearInterval(interval);
+		
 		var countGirl = parseInt($('div#counter-girl span').text()); // счетчик Ж
 		var countBoy = parseInt($('div#counter-boy span').text()); // счетчик М
 		
@@ -76,10 +103,24 @@ var time = {};
 		}
 		
 		var resultEl = $('div#select-result');
+		
+		var inputEl = $(resultEl).find('input');
+		
+		var level = dragDrop.level;
+		
+		if(effectResult > 100/* && level < 3*/) {
+			$(inputEl).val('Следующий уровень');
+			level++;
+		}
+		else {
+			$(inputEl).val('Сначала');
+			level = 1;
+		}
+		
 		resultEl.find('p').text(mes);
 		
 		resultEl.find('input').click(function() {
-			window.location.reload();
+			dragDrop.game(level);
 			
 			return false;
 		})
@@ -88,11 +129,9 @@ var time = {};
 			modal : true,
 			width : 400
 		}).prev().remove();
+		
+		audio.end();
 	}
 	
 })();
-
-$(function() {	
-	time.on();
-});
 
